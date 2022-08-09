@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<title>網上題庫</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<body>
+  <h2><i class="fa fa-bars"></i> PC Classroom</h2>
+   <button onclick="document.getElementById('id01').style.display='block'" class="w3-bar-item w3-button w3-black w3-large">+ 新增問題</button>
+<hr></hr> 
+
+
+
+
+<div class="w3-container">
+  <table class="w3-table-all w3-hoverable w3-striped">
+  <thead>
+    <tr class="w3-black"><th>科目</th><th>題號</th><th>問題</th><th>選擇A</th><th>選擇B</th><th>選擇C</th><th>選擇D</th><th>答案</th></tr>
+  </thead>
+  <tbody id="output">
+   
+  </tbody>
+</table>
+
+  <div id="id01" class="w3-modal">
+    <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+  
+      <div class="w3-center"><br>
+        <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-transparent w3-display-topright" title="Close Modal">×</span>
+      </div>
+
+      <form id="form1" class="w3-container w3-card-4 w3-light-grey w3-text-grey w3-margin">
+        <h2 class="w3-center">新增題目</h2>
+
+        <div class="w3-row w3-section">
+          <div class="w3-col" style="width:50px"><h4>科目</h4></div>
+            <div class="w3-rest">
+              <input class="w3-input w3-border" id="subject" name="subject" type="text" placeholder="科目">
+            </div>
+        </div>
+         
+        <div class="w3-row w3-section">
+          <div class="w3-col" style="width:50px"><h4>題號</h4></div>
+            <div class="w3-rest">
+              <input class="w3-input w3-border" id="qNo" name="qNo" type="text" placeholder="題號">
+            </div>
+        </div>
+        
+        <div class="w3-row w3-section">
+          <div class="w3-col" style="width:50px"><h4>題目</h4></div>
+            <div class="w3-rest">
+              <input class="w3-input w3-border" id="question" name="question" type="text" placeholder="題目">
+            </div>
+        </div>
+        <!--以下為選項-->
+        <div class="w3-row w3-section">
+          <div class="w3-col" style="width:50px"><input class="w3-radio" type="radio" id="answer" name="answer" value="A"></div>
+            <div class="w3-rest">
+              <input class="w3-input w3-border" id="choiceA" name="choiceA" type="text" placeholder="選擇A">
+            </div>
+        </div>
+
+        <div class="w3-row w3-section">
+          <div class="w3-col" style="width:50px"><input class="w3-radio" type="radio" id="answer" name="answer" value="B"></div>
+            <div class="w3-rest">
+              <input class="w3-input w3-border" id="choiceB" name="choiceB" type="text" placeholder="選擇B">
+            </div>
+        </div>
+        
+        <div class="w3-row w3-section">
+          <div class="w3-col" style="width:50px"><input class="w3-radio" type="radio" id="answer" name="answer" value="C"></div>
+            <div class="w3-rest">
+              <input class="w3-input w3-border" id="choiceC" name="choiceC" type="text" placeholder="選擇C">
+            </div>
+        </div>
+
+        <div class="w3-row w3-section">
+          <div class="w3-col" style="width:50px"><input class="w3-radio" type="radio" id="answer" name="answer" value="D"></div>
+            <div class="w3-rest">
+              <input class="w3-input w3-border" id="choiceD" name="choiceD" type="text" placeholder="選擇D">
+            </div>
+        </div>
+        </form>
+        <button onclick="newRecord()" class="w3-button w3-block w3-section w3-black w3-ripple w3-padding">Send</button>
+    </div>
+  </div>
+</div>
+<script src="serialize-0.2.js">
+  
+</script>
+<script>
+  fetch_page();
+  function newRecord(){
+    subject = document.getElementById("subject").value;
+    qNo = document.getElementById("qNo").value;
+    question = document.getElementById("question").value;
+    choiceA = document.getElementById("choiceA").value;
+    choiceB = document.getElementById("choiceB").value;
+    choiceC = document.getElementById("choiceC").value;
+    choiceD = document.getElementById("choiceD").value;
+    answer = document.getElementById("answer").value;
+
+    
+    //send data to the server
+    form1 = document.getElementById("form1");
+    fetch('cgi-bin/questionbank_Write.py?'+serialize(form1))
+      .then(Response => Response.json())
+      .then(json => {   
+          console.log(json);
+          fetch_page();
+      })
+    
+    //關閉輸入的視窗
+    document.getElementById('id01').style.display='none';
+    document.getElementById("subject").value = "";
+    document.getElementById("qNo").value = "";
+    document.getElementById("question").value = "";
+    document.getElementById("choiceA").value = "";
+    document.getElementById("choiceB").value = "";
+    document.getElementById("choiceC").value = "";
+    document.getElementById("choiceD").value = "";
+    document.getElementById("answer").value = "";
+  }
+  function fetch_page(){
+    fetch("cgi-bin/questionbank_Read.py")
+    .then(Response=>Response.json())
+    .then(json=>{
+      console.log(json);
+        s=''; 
+        for(i=0;i<json.length;i++){
+          s += `<tr><td>${json[i].subject}</td><td>${json[i].qNo}</td><td>${json[i].question}</td><td>${json[i].choiceA}</td><td>${json[i].choiceB}</td><td>${json[i].choiceC}</td><td>${json[i].choiceD}</td><td>${json[i].answer}</td></tr>`;
+        }
+        output = document.getElementById('output');
+        output.innerHTML = s;  
+    })
+  }
+
+</script>           
+            
+</body>
+
+</html>

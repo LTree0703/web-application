@@ -1,0 +1,59 @@
+<html>
+<title>W3.CSS</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<style>
+  img {
+    object-fit: cover;
+    width:85px;
+    height:70px;
+  }  
+</style>
+<body>
+
+<div class="w3-container">
+  <h2>Avatar List</h2>
+  <p>You can combine w3-ul and the w3-bar classes to create an avatar list:</p>
+  <ul class="w3-ul w3-card-4" id="output">
+
+  </ul>
+</div>
+
+<script>
+    function delete_item(item,id) {
+        fetch('cgi-bin/s5b25ex303Delete.py?id='+id)//呼叫執行Delete program
+        .then(Response => Response.json())
+        .then(json => {  
+          console.log(json);
+          item.parentElement.style.display='none';//令item消失
+        })
+    }
+    function fetch_page() {
+        fetch('cgi-bin/s5b25ex303Read.py')//直接呼叫.csv file 
+        .then(Response => Response.json())//動態產生.json file
+        .then(json => {    
+
+          console.log(json)
+          s = '';
+          for(i=0; i<json.length; i++) {
+
+            s += `<li class="w3-bar">`;
+            s += `  <span onclick="delete_item(this,${json[i].id})" class="w3-bar-item w3-button w3-white w3-xlarge w3-right">×</span>`;
+            s += `  <img src="book_images/${json[i].image}" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">`;
+            s += `  <div class="w3-bar-item">`;
+            s += `    <span class="w3-large">${json[i].book}</span><br>`;
+            s += `    <span>${json[i].author}</span>`;
+            s += `  </div>`;
+            s += `</li>`;
+          } 
+          
+          output = document.getElementById('output');
+          output.innerHTML = s;          
+        })
+    }
+
+    fetch_page();
+</script>
+</body>
+</html>

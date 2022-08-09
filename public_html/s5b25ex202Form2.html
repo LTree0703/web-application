@@ -1,0 +1,40 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>表單網頁</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3pro.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">  
+</head>
+<body>
+  <h1 class="w3-sand">網上訂餐</h1>
+  <form class="w3-container" action="cgi-bin/s5b25ex202Write.py">
+  
+    <h5><label>電話號碼</label></h5>
+    <input class="w3-input w3-round w3-hover-light-grey" type="text" name="Telno">
+    
+    
+    <h5><label>食物</label></h5>
+    <p>
+    <input class="w3-radio" type="radio" name="Food" value="杯麵">
+    <label>杯麵</label></p>
+    <p>
+    <input class="w3-radio" type="radio" name="Food" value="公仔麵">
+    <label>公仔麵</label></p>
+    <p>
+    <input class="w3-radio" type="radio" name="Food" value="可樂">
+    <label>可口可樂</label></p>
+    
+    <h5><label>配送方式</label></h5>
+    <p>
+    <select class="w3-select w3-border w3-round" name="option">
+    <option value="" disabled selected>請選擇……</option>
+    <option value="delivery">外賣</option>
+    <option value="takeaway">自取</option>
+    </select>
+    <br>
+    <button class="w3-btn w3-border w3-round w3-sand w3-hover-amber">提交</button>
+  
+  </form>
+</body>
+</html>

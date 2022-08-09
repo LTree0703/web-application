@@ -1,0 +1,126 @@
+<html>
+<title>培正寶購物網站</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<style>
+.overflow-ellipsis {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+} 
+</style>
+<body>
+
+<div class="w3-pannel w3-light-grey">
+
+  <div class="w3-display-container w3-orange">
+      <h2 onmouseover = "fetch_page()">培正寶購物網站</h2>
+      <div class="w3-display-right w3-margin-right">
+        <input class="w3-input w3-border w3-round" type="text" placeholder="search">
+      </div>
+  </div>
+
+  <div class="w3-row" id = "output">
+
+    <div class="w3-col s6 m4 l3" >
+        <div class="w3-pannel w3-margin w3-card-4 w3-round">
+            <img src="taobao_images/image00.jpg" style="width:100%; border-top-left-radius: 4px; border-top-right-radius: 4px">
+            <div class="w3-container">
+                <div class="w3-pannel overflow-ellipsis" style="height:60px;">
+                    <p>茶具</p>
+                </div>
+                <div class="w3-display-container" style="height:30px">                
+                    <div class="w3-display-topleft w3-large w3-text-deep-orange">$300</div>
+                    <div class="w3-display-topright w3-small w3-text-grey">月銷:30</div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- one column block -->
+
+
+    <div class="w3-col s6 m4 l3">
+        <div class="w3-pannel w3-margin w3-card-4 w3-round">
+            <img src="taobao_images/image00.jpg" style="width:100%; border-top-left-radius: 4px; border-top-right-radius: 4px">
+            <div class="w3-container">
+                <div class="w3-pannel overflow-ellipsis" style="height:60px;">
+                    <p>茶具</p>
+                </div>
+                <div class="w3-display-container" style="height:30px">                
+                    <div class="w3-display-topleft w3-large w3-text-deep-orange">$300</div>
+                    <div class="w3-display-topright w3-small w3-text-grey">月銷:30</div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- one column block -->
+
+
+    <div class="w3-col s6 m4 l3">
+        <div class="w3-pannel w3-margin w3-card-4 w3-round">
+            <img src="taobao_images/image00.jpg" style="width:100%; border-top-left-radius: 4px; border-top-right-radius: 4px">
+            <div class="w3-container">
+                <div class="w3-pannel overflow-ellipsis" style="height:60px;">
+                    <p>茶具</p>
+                </div>
+                <div class="w3-display-container" style="height:30px">                
+                    <div class="w3-display-topleft w3-large w3-text-deep-orange">$300</div>
+                    <div class="w3-display-topright w3-small w3-text-grey">月銷:30</div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- one column block -->
+    
+    
+    <div class="w3-col s6 m4 l3">
+        <div class="w3-pannel w3-margin w3-card-4 w3-round">
+            <img src="taobao_images/image00.jpg" style="width:100%; border-top-left-radius: 4px; border-top-right-radius: 4px">
+            <div class="w3-container">
+                <div class="w3-pannel overflow-ellipsis" style="height:60px;">
+                    <p>茶具</p>
+                </div>
+                <div class="w3-display-container" style="height:30px">                
+                    <div class="w3-display-topleft w3-large w3-text-deep-orange">$300</div>
+                    <div class="w3-display-topright w3-small w3-text-grey">月銷:30</div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- one column block -->
+    
+    
+
+
+  </div> <!-- end of w3-row-->
+</div> <!-- end of w3-container-->
+<script>
+    function fetch_page(){
+        fetch("taobao.json")
+        .then(Response=>Response.json())
+        .then(json=>{
+            console.log(json);
+            s=''; 
+            for(i=0;i<json.length;i++){
+                s += `<div class="w3-col s6 m4 l3">`;
+                s += `<div class="w3-pannel w3-margin w3-card-4 w3-round">`;
+                s += `<img src="taobao_images/${json[i].picture}" style="width:100%; border-top-left-radius: 4px; border-top-right-radius: 4px">`;
+                s += `<div class="w3-container">`;
+                s += `<div class="w3-pannel overflow-ellipsis" style="height:60px;">`;
+                s += `<p>${json[i].itemName}</p>`;
+                s += `</div>`;
+                s += `<div class="w3-display-container" style="height:30px">`;
+                s += `<div class="w3-display-topleft w3-large w3-text-deep-orange">$${json[i].price}</div>`;
+                s += `<div class="w3-display-topright w3-small w3-text-grey">月銷:${json[i].amount}</div>`;
+                s += `</div>`;
+                s += `</div>`;
+                s += `</div>`;
+                s += `</div> `;
+            }
+            output = document.getElementById('output');
+            output.innerHTML = s;  
+        })
+    }
+</script>
+</body>
+</html>

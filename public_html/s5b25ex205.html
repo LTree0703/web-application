@@ -1,0 +1,35 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>網頁標題</title>
+</head>
+<body>
+  <h1 ondblclick="callMe()">澳門培正中學簡介</h1>
+  <p id="p1">十年樹木，百年樹人</p>
+  <p>提高教學質量，改善學習環境，保持嚴謹校風</p>
+  <p>傳承優良傳統，植根過去，立足現在，放眼未來</p>
+  <p>一條龍學校</p>
+  <h2>班級名稱</h2>  
+  <ul id="classList">
+  
+  </ul>
+  <script>
+    function callMe(){
+      alert("hello")
+      
+      p1 = document.getElementById('p1');
+      p1.innerHTML = '追求「至善至正」';
+
+      data = ['信','望','愛','善','正','光'];
+      console.log(data);
+      s = '';
+      for(i=0; i<data.length; i++){
+        s += `<li>${data[i]}</li>`;
+      }
+      classList = document.getElementById('classList');
+      classList.innerHTML = s;
+
+    }
+  </script>
+</body>
+</html>

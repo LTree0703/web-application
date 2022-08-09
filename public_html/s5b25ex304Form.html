@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<title>成績表管理系統</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<body>
+
+<div class="w3-container">
+  <h2>W3.CSS Login Modal</h2>
+  <table class="w3-table-all w3-hoverable w3-striped">
+      <thead>
+        <tr class="w3-teal"><th>班內號</th><th>學生姓名</th><th>中文</th><th>英文</th><th>數學</th></tr>
+      </thead>
+      <tbody id="output">
+       
+      </tbody>
+  </table>
+
+  <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-teal w3-large">新增</button>
+
+  <div id="id01" class="w3-modal">
+    <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+  
+      <div class="w3-center"><br>
+        <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal">×</span>
+        <h4>成績記錄表</h4>
+      </div>
+
+      <form id="form1" class="w3-container" action="/action_page.php">
+        <div class="w3-section">
+          <label><b>班內號</b></label>
+          <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="e.g. 1" name="stdNo" id="stdNo" required>
+
+          <label><b>學生姓名</b></label>
+          <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="e.g. 陳大文" name="stdName" id="stdName" required>
+
+          <label><b>中文成績</b></label>
+          <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="中文" name="chinese" id="chinese" required>
+
+          <label><b>英文成績</b></label>
+          <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="英文" name="english" id="english" required>
+
+          <label><b>數學成績</b></label>
+          <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="數學" name="maths" id="maths" required>
+        </div>
+      </form>
+
+      <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+        <button onclick="document.getElementById('id01').style.display='none'" type="button" class="w3-button w3-red">取消</button>
+        <button onclick="newRecord()" class="w3-button w3-right w3-teal" type="submit">確認</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+<script src="serialize-0.2.js">
+  
+</script>
+<script>
+  fetch_page();
+  function newRecord(){
+    stdNo = document.getElementById("stdNo").value;
+    stdName = document.getElementById("stdName").value;
+    chinese = document.getElementById("chinese").value;
+    english = document.getElementById("english").value;
+    maths = document.getElementById("maths").value;
+    
+    
+
+    //send data to the server
+    form1 = document.getElementById("form1");
+    fetch('cgi-bin/s5b25ex304Write.py?'+serialize(form1))
+      .then(Response => Response.json())
+      .then(json => {   
+          console.log(json);
+      });
+    //show new data on the website
+    s = `<tr><td>${stdNo}</td><td>${stdName}</td><td>${chinese}</td><td>${english}</td><td>${maths}</td></tr>`;
+    output = document.getElementById("output");
+    output.innerHTML += s;
+    
+    //關閉輸入的視窗
+    document.getElementById('id01').style.display='none';
+    document.getElementById("stdNo").value = "";
+    document.getElementById("stdName").value = "";
+    document.getElementById("chinese").value = "";
+    document.getElementById("english").value = "";
+    document.getElementById("maths").value = "";
+    
+  }
+  function fetch_page(){
+    fetch("cgi-bin/s5b25ex304Read.py")
+    .then(Response=>Response.json())
+    .then(json=>{
+      console.log(json);
+        s=''; 
+        for(i=0;i<json.length;i++){
+          s += `<tr><td>${json[i].stdNo}</td><td>${json[i].stdName}</td><td>${json[i].chinese}</td><td>${json[i].english}</td><td>${json[i].maths}</td></tr>`;
+        }
+        output = document.getElementById('output');
+        output.innerHTML = s;  
+    })
+  }
+
+</script>
+            
+</body>
+</html>

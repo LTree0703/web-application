@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<title>網上題庫</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<body>
+
+<div class="w3-container">
+  <h2>網上題庫</h2>
+
+  <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-green w3-large">+ 新增</button>
+
+  <div id="id01" class="w3-modal">
+    <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+  
+      <div class="w3-center"><br>
+        <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-transparent w3-display-topright" title="Close Modal">×</span>
+      </div>
+
+      <form id="form1" class="w3-container w3-card-4 w3-light-grey w3-text-blue w3-margin">
+        <h2 class="w3-center">網上題庫</h2>
+         
+        <div class="w3-row w3-section">
+          <div class="w3-col" style="width:50px"><h4>題號</h4></div>
+            <div class="w3-rest">
+              <input class="w3-input w3-border" name="qNo" type="text" placeholder="題號">
+            </div>
+        </div>
+        
+        <div class="w3-row w3-section">
+          <div class="w3-col" style="width:50px"><h4>題目</h4></div>
+            <div class="w3-rest">
+              <input class="w3-input w3-border" name="question" type="text" placeholder="題目">
+            </div>
+        </div>
+        <!--以下為選項-->
+        <div class="w3-row w3-section">
+          <div class="w3-col" style="width:50px"><input class="w3-radio" type="radio" name="answer" value="A"></div>
+            <div class="w3-rest">
+              <input class="w3-input w3-border" name="choiceA" type="text" placeholder="選擇A">
+            </div>
+        </div>
+
+        <div class="w3-row w3-section">
+          <div class="w3-col" style="width:50px"><input class="w3-radio" type="radio" name="answer" value="B"></div>
+            <div class="w3-rest">
+              <input class="w3-input w3-border" name="choiceB" type="text" placeholder="選擇B">
+            </div>
+        </div>
+        
+        <div class="w3-row w3-section">
+          <div class="w3-col" style="width:50px"><input class="w3-radio" type="radio" name="answer" value="C"></div>
+            <div class="w3-rest">
+              <input class="w3-input w3-border" name="choiceC" type="text" placeholder="選擇C">
+            </div>
+        </div>
+
+        <div class="w3-row w3-section">
+          <div class="w3-col" style="width:50px"><input class="w3-radio" type="radio" name="answer" value="D"></div>
+            <div class="w3-rest">
+              <input class="w3-input w3-border" name="choiceD" type="text" placeholder="選擇D">
+            </div>
+        </div>
+        </form>
+        <button onclick="newRecord()" class="w3-button w3-block w3-section w3-blue w3-ripple w3-padding">Send</button>
+    </div>
+  </div>
+</div>
+<script src="serialize-0.2.js">
+  
+</script>
+<script>
+  //fetch_page();
+  function newRecord(){
+    //stdNo = document.getElementById("stdNo").value;
+    //stdName = document.getElementById("stdName").value;
+    //chinese = document.getElementById("chinese").value;
+    //english = document.getElementById("english").value;
+    //maths = document.getElementById("maths").value;
+    
+    //send data to the server
+    form1 = document.getElementById("form1");
+    fetch('cgi-bin/s5b25ex305Write.py?'+serialize(form1))
+      .then(Response => Response.json())
+      .then(json => {   
+          console.log(json);
+      });
+    //show new data on the website
+    //s = `<tr><td>${stdNo}</td><td>${stdName}</td><td>${chinese}</td><td>${english}</td><td>${maths}</td></tr>`;
+    //output = document.getElementById("output");
+    //output.innerHTML += s;
+    
+    //關閉輸入的視窗
+    document.getElementById('id01').style.display='none';
+    //document.getElementById("qNo").value = "";
+    //document.getElementById("question").value = "";
+    //document.getElementById("choiceA").value = "";
+    //document.getElementById("choiceB").value = "";
+    //document.getElementById("choiceC").value = "";
+    //document.getElementById("choiceD").value = "";
+    //document.getElementById("answer").value = "";
+  }
+  //function fetch_page(){
+  //  fetch("cgi-bin/s5b25ex304Read.py")
+  //  .then(Response=>Response.json())
+  //  .then(json=>{
+  //    console.log(json);
+  //      s=''; 
+  //      for(i=0;i<json.length;i++){
+  //        s += `<tr><td>${json[i].stdNo}</td><td>${json[i].stdName}</td><td>${json[i].chinese}</td><td>${json[i].english}</td><td>${json[i].maths}</td></tr>`;
+  //      }
+  //      output = document.getElementById('output');
+  //      output.innerHTML = s;  
+  //  })
+  //}
+
+</script>           
+            
+</body>
+
+</html>

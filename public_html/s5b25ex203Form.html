@@ -1,0 +1,63 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>表單網頁</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3pro.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">  
+</head>
+<body>
+  <header class="w3-container w3-teal">
+    <h1>澳門培正中學新生入學登記</h1>
+  </header>
+  <div class="w3-container w3-margin-top">
+  <form class="w3-container w3-card-4" action="cgi-bin/s5b25ex203Write.py">
+  
+    <h5><label>一、學生姓名 Student Name: </label></h5>
+    <input class="w3-input w3-round w3-hover-light-grey" type="text" name="studentName" placeholder="請輸入中文姓名 例：陳大文">
+    
+    <h5><label>二、出生日期 Birth date:</label></h5>
+      <div class="w3-row-padding">
+        <div class="w3-third">
+          <input class="w3-input w3-border" type="text" name="birthdate" placeholder="MM">
+        </div>
+        <div class="w3-third">
+          <input class="w3-input w3-border" type="text" name="birthdate" placeholder="DD">
+        </div>
+        <div class="w3-third">
+          <input class="w3-input w3-border" type="text" name="birthdate" placeholder="YYYY">
+        </div>
+      </div>
+    <h5><label>三、性別 Gender: </label></h5>
+    <p>
+    <input class="w3-radio" type="radio" name="gender" value="male">
+    <label>男性 Male</label></p>
+    <p>
+    <input class="w3-radio" type="radio" name="gender" value="female">
+    <label>女性 Female</label></p>
+  
+
+    <h5><label>四、報讀年級 Class: </label></h5>
+    <select class="w3-select w3-border w3-round" name="className">
+      <option value="" disabled selected>(未選擇)</option>
+      <option value="K1">幼兒 K1</option>
+      <option value="K2">幼初 K2</option>
+      <option value="K3">幼高 K3</option>
+    </select>
+
+    <h5><label>五、父親姓名 Father's Name: </label></h5>
+    <input class="w3-input w3-round w3-hover-light-grey" type="text" name="fatherName" placeholder="請輸入中文姓名 例：陳大文">
+
+    <h5><label>六、母親姓名 Mother's Name: </label></h5>
+    <input class="w3-input w3-round w3-hover-light-grey" type="text" name="motherName" placeholder="請輸入中文姓名 例：陳大文">
+
+    <h5><label>七、聯絡電話 Contact Number: </label></h5>
+    <input class="w3-input w3-round w3-hover-light-grey" type="text" name="contactNo" placeholder="(+853) 67891234">
+
+    <br>
+    <button class="w3-btn w3-border w3-round w3-teal w3-hover-amber">提交</button>
+    <br>
+  </form>
+</div>
+</body>
+</html>

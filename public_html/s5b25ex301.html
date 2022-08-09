@@ -1,0 +1,90 @@
+<html>
+<head>
+  <title>網上教室</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3pro.css">  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">  
+</head>
+<body>
+    <h2 onclick = "fetch_page()"><i class="fa fa-bars"></i> PC Classroom</h2>
+<hr></hr>
+    
+<div id="output" class="w3-container">
+
+    <div class="w3-card w3-red w3-border w3-round-xlarge w3-margin" style="height: 400px;">
+      <h1 class="w3-margin">2020中文</h1>
+      <h5 class="w3-margin">網上教室</h5>
+      <div class="w3-pannel w3-white w3-padding" style="height: 210px;">
+        <p>這是第一段功課</p>
+      </div>
+      <div class="w3-container w3-right">
+        <p>
+          <i class="w3-xlarge fa fa-chrome"></i>
+          <i class="w3-xlarge fa fa-android"></i>
+        </p>
+      </div>
+    </div> <!-- end of classroom div -->
+
+
+    <div class="w3-card w3-green w3-border w3-round-xlarge w3-margin" style="height: 400px;">
+      <h1 class="w3-margin">2020中文</h1>
+      <h5 class="w3-margin">網上教室</h5>
+      <div class="w3-pannel w3-white w3-padding" style="height: 210px;">
+        <p>這是第一段功課</p>
+      </div>
+      <div class="w3-container w3-right">
+        <p>
+          <i class="w3-xlarge fa fa-chrome"></i>
+          <i class="w3-xlarge fa fa-android"></i>
+        </p>
+      </div>
+    </div> <!-- end of classroom div -->
+
+    
+    <div class="w3-card w3-blue w3-border w3-round-xlarge w3-margin" style="height: 400px;">
+      <h1 class="w3-margin">2020中文</h1>
+      <h5 class="w3-margin">網上教室</h5>
+      <div class="w3-pannel w3-white w3-padding" style="height: 210px;">
+        <p>這是第一段功課</p>
+      </div>
+      <div class="w3-container w3-right">
+        <p>
+          <i class="w3-xlarge fa fa-chrome"></i>
+          <i class="w3-xlarge fa fa-android"></i>
+        </p>
+      </div>
+    </div> <!-- end of classroom div -->
+
+  
+</div>
+</body>
+<script>
+  function fetch_page(){
+    fetch("pc_classroom.json")
+    .then(Response=>Response.json())
+    .then(json=>{
+      console.log(json);
+        s=''; 
+        for(i=0;i<json.length;i++){
+        s+=`<div class="w3-card ${json[i].colour} w3-border w3-round-xlarge w3-margin" style="height: 400px;">`
+        s+=`<h1 class="w3-margin">${json[i].title}</h1>`
+        s+=`<h5 class="w3-margin">${json[i].subtitle}</h5>`
+        s+=`<div class="w3-pannel w3-white w3-padding" style="height: 210px;">`
+        s+=`<p>${json[i].reminder}</p>`
+        s+=`</div>`
+        s+=`<div class="w3-container w3-right">`
+        s+=`<p>`
+        s+=`<i class="w3-xlarge fa fa-chrome"></i>`
+        s+=`<i class="w3-xlarge fa fa-android"></i>`
+        s+=`</p>`
+        s+=`</div>`
+        s+=`</div> `
+        }
+        output = document.getElementById('output');
+        output.innerHTML = s;  
+    })
+  }
+</script>
+</html>
